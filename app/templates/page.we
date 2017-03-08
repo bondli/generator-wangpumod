@@ -1,0 +1,95 @@
+<template>
+  <div data-role="<%= fileName.replace('wpm-', '') %>">
+    <div class="wrapper" style="margin-bottom:{{gdc.spaceInBetween||8}}" if="{{(gdc.preView==true||gdc.preView=='true') && (!mds.moduleData || !mds.moduleData.src)}}">
+      <image src="{{mds.defaultImage}}" class="default-image"></image>
+    </div>
+
+    <div class="wrapper" style="margin-bottom:{{gdc.spaceInBetween||8}}" if="{{mds.isEmpty=='false' && mds.moduleData && mds.moduleData.src}}">
+      <image class="pic" src="{{mds.moduleData.src}}" url="{{mds.moduleData.href}}" if="{{mds.moduleData.src}}" onclick="goTargetUrl"></image>
+    </div>
+  </div>
+</template>
+
+<style>
+  .wrapper {
+    width: 750;
+    background-color: #ffffff;
+  }
+  .default-image {
+    width: 750;
+    height: 400;
+  }
+  .pic {
+    width: 750;
+    height: 470;
+  }
+</style>
+
+<script>
+  module.exports = {
+    data: {
+      mds: {
+        widgetId: '<%= fileName.replace('wpm-', '') %>_id_1',
+        moduleName: '<%= fileName.replace('wpm-', '') %>',
+        isEmpty: 'true',
+        defaultImage: '//gtms02.alicdn.com/tps/i2/TB1VGOiFVXXXXcraXXXGJ_gSVXX-304-170.png',
+        moduleData: {}
+      },
+      gdc: {
+        'preView': true,
+        'spaceInBetween': 8,
+        'userId': 2202220535,
+        'pageId': 66223002,
+        'pageName': 'pagename',
+        'loginUserId': 2202220535,
+        'spm': '0.0.0.0',
+        'wp_pk': 'test'
+      }
+    },
+    methods: {
+      /**
+       * 跳转URL，先进行了UT埋点调用，再跳转，交由父页面完成跳转和上报
+       */
+      goTargetUrl: function(e) {
+        console.log('click event:', e);
+        this.$dispatch('goTargetUrl', {
+          url: e.target.attr.url,
+          nid: e.target.attr.nid || 0,
+          widgetId: this.mds.widgetId,
+          moduleName: this.mds.moduleName
+        });
+      },
+
+      /**
+       * 对外接口，让页面中调用的时候赋值用（异步渲染模块）
+       */
+      render: function(ds, gd){
+        var vm = this;
+        if(ds){ vm.mds = ds; }
+        if(gd){ vm.gdc = gd; }
+      }
+    },
+
+    /**
+     * 生命周期函数，在渲染之前会调用
+     */
+    created: function () {
+      //mock start,donot modify
+      var config = this.$getConfig();
+      //如果是本地开发环境，将调用mock数据供测试用
+      if(config.env.platform === 'Web' && config.bundleUrl.indexOf('local')>-1){
+        var vm = this;
+        require('@weex-module/stream').fetch({
+          method: 'GET',
+          url: '/data/weex-mock.json',
+          type:'json'
+        }, function(ret){
+          vm.mds.isEmpty = ret.data.isEmpty;
+          vm.mds.defaultImage = ret.data.defaultImage;
+          vm.mds.moduleData = ret.data.moduleData;
+        });
+      }
+      //mock end
+    }
+  };
+</script>

@@ -1,0 +1,16 @@
+Description:
+    Creates a default web project
+
+Example:
+    yo wangpumod
+
+    This will create:
+        index.html
+        webpack.config.web.js
+        webpack.config.weex.js
+        gulpfile.js
+        package.json
+        README.md
+        src
+        pages
+        data

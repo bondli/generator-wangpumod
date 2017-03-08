@@ -1,0 +1,32 @@
+{
+  "name": "generator-wangpumod",
+  "version": "0.0.1",
+  "description": "wangpu module open platform develop tools",
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "wangpumod"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^1.0.0",
+    "yosay": "^0.2.0",
+    "chalk": "^0.4.0",
+    "wiredep": "~1.0.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bondli/generator-wangpumod.git"
+  },
+  "author": "bondli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bondli/generator-wangpumod/issues"
+  },
+  "homepage": "https://github.com/bondli/generator-wangpumod#readme"
+}

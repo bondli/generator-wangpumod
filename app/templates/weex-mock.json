@@ -1,0 +1,11 @@
+{
+  "moduleName": "<%= fileName.replace('wpm-', '') %>",
+  "componetId":"36171",
+  "widgetId": "99999",
+  "isEmpty":"false",
+  "defaultImage": "http://gtms02.alicdn.com/tps/i2/TB1VGOiFVXXXXcraXXXGJ_gSVXX-304-170.png",
+  "moduleData":{
+    "src":"//gw.alicdn.com/tps/TB181ekIFXXXXbyXXXXXXXXXXXX.jpg",
+    "href":"//h5.m.taobao.com/m-activity-out/ugo.html?seller_id=2202220535"
+  }
+}
